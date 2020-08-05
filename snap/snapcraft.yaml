@@ -1,15 +1,37 @@
-name: my-snap-name # you probably want to 'snapcraft register <name>'
-version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
+name: hearts # you probably want to 'snapcraft register <name>'
+base: core18 # the base snap is the execution environment for this snap
+version: '1.5.3' # just for humans, typically '1.2+git' or '1.3.2'
 summary: Single-line elevator pitch for your amazing snap # 79 char long summary
-description: |
-  This is my-snap's description. You have a paragraph or two to tell the
-  most important story about your snap. Keep it under 100 words though,
-  we live in tweetspace and your description wants to look good in the snap
-  store.
-
-confinement: devmode # use 'strict' once you have the right plugs and slots
-
+description: The classic hearts card game which was originally build for the GNOME desktop and is umaintained right now.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots   
+apps:
+    hearts:
+     common-id: org.kde.hearts.desktop
+     command: ./Hearts
+     extensions:
+      - kde-neon
+     plugs:
+      - x11
+      - desktop
+      - desktop-legacy
+      - wayland
+      - unity7
+      - opengl
+      - audio-playback
 parts:
-  my-part:
-    # See 'snapcraft plugins'
-    plugin: nil
+     # See 'snapcraft plugins'
+    hearts:
+     source: https://github.com/Rescator7/Hearts.git
+     source-type: git
+     plugin: qmake
+     override-build: |
+      snapcraftctl build
+      mv Hearts *.o /root/prime/    
+     build-packages:
+      [ liballegro5-dev, g++, liballegro-audio5-dev, liballegro-acodec5-dev]
+     stage-packages:
+      [ liballegro-audio5.2, liballegro-acodec5.2, libqt5widgets5]
+     build-snaps:
+      - kde-frameworks-5-core18-sdk
+      - kde-frameworks-5-core18
