@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=hearts
+Icon=hearts.png
+Name=Hearts
+Terminal=false
+Categories=Game;CardGame;
+Type=Application
+Comment=The classic hearts card game. Orignally written by https://github.com/Rescator7
+Keywords=hearts;
