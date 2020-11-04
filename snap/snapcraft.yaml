@@ -36,7 +36,7 @@ parts:
      plugin: qmake
      override-build: |
       snapcraftctl build
-      mv Hearts *.o $SNAP/root/prime/    
+      mv Hearts *.o $SNAPCRAFT_PRIME 
      build-packages:
       [ liballegro5-dev, g++, liballegro-audio5-dev, liballegro-acodec5-dev]
      stage-packages:
